@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Joshua Partners — Recruitment</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --black: #0a0a0a;
+      --white: #f5f2ee;
+      --gold: #c9a84c;
+      --gold-light: #e8d5a3;
+      --gray: #6b6b6b;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 24px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(to bottom, rgba(10,10,10,0.95), transparent);
+    }
+
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    .logo span { color: var(--gold); }
+
+    nav a {
+      color: var(--gray);
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+
+    nav a:hover { color: var(--gold); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 120px 48px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px; right: -200px;
+      width: 700px; height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-label {
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.2s;
+    }
+
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(52px, 8vw, 110px);
+      font-weight: 500;
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      max-width: 900px;
+      opacity: 0;
+      animation: fadeUp 0.9s ease forwards 0.4s;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .hero-sub {
+      margin-top: 36px;
+      font-size: 16px;
+      color: var(--gray);
+      max-width: 520px;
+      line-height: 1.7;
+      font-weight: 300;
+      opacity: 0;
+      animation: fadeUp 0.9s ease forwards 0.6s;
+    }
+
+    .hero-cta {
+      margin-top: 52px;
+      opacity: 0;
+      animation: fadeUp 0.9s ease forwards 0.8s;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 16px 40px;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      text-decoration: none;
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--gold);
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+      z-index: -1;
+    }
+
+    .btn:hover { color: var(--black); }
+    .btn:hover::before { transform: translateX(0); }
+
+    /* SECTIONS */
+    .section { padding: 100px 48px; }
+
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+
+    .section h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 500;
+      line-height: 1.1;
+      max-width: 700px;
+      margin-bottom: 24px;
+    }
+
+    .section h2 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .section p {
+      color: var(--gray);
+      font-size: 16px;
+      line-height: 1.8;
+      max-width: 560px;
+      margin-bottom: 16px;
+    }
+
+    /* SECTORS */
+    .sectors-bg { background: #111; }
+
+    .sectors-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2px;
+      margin-top: 64px;
+    }
+
+    .sector-card {
+      padding: 48px 36px;
+      background: #0f0f0f;
+      border-top: 1px solid rgba(201,168,76,0.15);
+      transition: background 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sector-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+
+    .sector-card:hover { background: #141414; }
+    .sector-card:hover::before { transform: scaleX(1); }
+
+    .sector-icon {
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+
+    .sector-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .sector-card p {
+      color: var(--gray);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    /* HOW IT WORKS */
+    .process-bg { background: #0d0d0d; }
+
+    .process-steps { margin-top: 64px; }
+
+    .process-step {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 32px;
+      padding: 40px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      align-items: start;
+    }
+
+    .process-step:last-child { border-bottom: none; }
+
+    .step-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 52px;
+      color: rgba(201,168,76,0.2);
+      font-weight: 600;
+      line-height: 1;
+    }
+
+    .step-content h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .step-content p {
+      color: var(--gray);
+      font-size: 15px;
+      line-height: 1.8;
+      max-width: 600px;
+    }
+
+    /* WHY US */
+    .pillars {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 40px;
+      margin-top: 64px;
+    }
+
+    .pillar h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: var(--gold-light);
+    }
+
+    .pillar p { color: var(--gray); font-size: 14px; line-height: 1.8; }
+
+    /* MARKETS */
+    .markets-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 24px;
+      margin-top: 56px;
+    }
+
+    .market-item {
+      padding: 28px 24px;
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: border-color 0.3s;
+    }
+
+    .market-item:hover { border-color: rgba(201,168,76,0.3); }
+
+    .market-flag { font-size: 28px; margin-bottom: 12px; }
+
+    .market-item h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .market-item p { color: var(--gray); font-size: 13px; line-height: 1.6; }
+
+    /* CONTACT */
+    .contact-bg { background: #080808; text-align: center; }
+
+    .contact-bg h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(40px, 6vw, 80px);
+      font-weight: 500;
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+
+    .contact-bg h2 em { font-style: italic; color: var(--gold); }
+    .contact-bg p { color: var(--gray); font-size: 16px; margin-bottom: 24px; line-height: 1.7; }
+
+    /* FOOTER */
+    footer {
+      padding: 32px 48px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    footer p { color: var(--gray); font-size: 12px; letter-spacing: 0.1em; }
+    footer .logo { font-size: 16px; }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 768px) {
+      nav { padding: 20px 24px; }
+      nav a { display: none; }
+      .hero { padding: 100px 24px 60px; }
+      .section { padding: 72px 24px; }
+      .process-step { grid-template-columns: 1fr; gap: 12px; }
+      .step-num { font-size: 36px; }
+      footer { padding: 24px; flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="logo">Joshua <span>Partners</span></a>
+    <a href="#contact">Get in Touch</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <p class="hero-label">Specialist Recruitment — Renewable Energy & Beyond</p>
+    <h1>The right people.<br>In the right <em>roles.</em></h1>
+    <p class="hero-sub">Joshua Partners connects growing companies with high-performing talent across the renewable energy, solar, and clean tech sectors — globally.</p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn">Find Your Next Hire</a>
+    </div>
+  </section>
+
+  <!-- WHO WE SERVE -->
+  <section class="section fade-in">
+    <p class="section-label">Who We Serve</p>
+    <h2>Built for companies serious about <em>talent.</em></h2>
+    <p>We work with solar installation companies, renewable energy developers, clean tech firms and recruitment agencies across Australia, the USA, UK, Canada and Europe.</p>
+    <p>Whether you need one critical hire or a pipeline of qualified candidates — we source, vet and deliver talent that moves your business forward.</p>
+  </section>
+
+  <!-- SECTORS -->
+  <section class="section sectors-bg fade-in">
+    <p class="section-label">Our Sectors</p>
+    <h2>Specialist talent across <em>clean energy.</em></h2>
+    <div class="sectors-grid">
+      <div class="sector-card">
+        <div class="sector-icon">☀️</div>
+        <h3>Solar Energy</h3>
+        <p>Solar Sales Representatives, Installation Technicians, Project Managers and Business Development professionals across residential and commercial solar markets.</p>
+      </div>
+      <div class="sector-card">
+        <div class="sector-icon">💨</div>
+        <h3>Wind Energy</h3>
+        <p>Wind Turbine Technicians, Site Managers, Engineers and Sales professionals across onshore and offshore wind projects globally.</p>
+      </div>
+      <div class="sector-card">
+        <div class="sector-icon">🔋</div>
+        <h3>Battery & Storage</h3>
+        <p>Battery Storage Specialists, Energy Engineers and Technical Sales professionals for the rapidly growing storage and grid solutions market.</p>
+      </div>
+      <div class="sector-card">
+        <div class="sector-icon">⚡</div>
+        <h3>EV & Clean Tech</h3>
+        <p>Electric Vehicle specialists, Charging Infrastructure professionals and Clean Technology Sales experts across emerging green mobility markets.</p>
+      </div>
+      <div class="sector-card">
+        <div class="sector-icon">🌿</div>
+        <h3>Sustainability</h3>
+        <p>Sustainability Managers, ESG Consultants and Green Energy Advisors for corporates and government bodies committed to net zero targets.</p>
+      </div>
+      <div class="sector-card">
+        <div class="sector-icon">🏗️</div>
+        <h3>Project Development</h3>
+        <p>Renewable Energy Project Developers, Land Acquisition Specialists, Planning Consultants and Construction Managers for large scale energy projects.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section process-bg fade-in">
+    <p class="section-label">How It Works</p>
+    <h2>Four steps. <em>One great hire.</em></h2>
+    <div class="process-steps">
+      <div class="process-step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h3>Understanding Your Needs</h3>
+          <p>We take time to understand your company, your culture, your role requirements and the type of candidate who will genuinely thrive in your team — not just fill a seat.</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h3>Targeted Candidate Sourcing</h3>
+          <p>We actively source candidates through our industry network, direct outreach and specialist platforms — going beyond job boards to find people who aren't actively looking but are open to the right opportunity.</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h3>Vetting & Shortlisting</h3>
+          <p>Every candidate is thoroughly vetted for experience, cultural fit and role alignment before being presented to you. You only see profiles worth your time.</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h3>Placement & Guarantee</h3>
+          <p>We manage the placement process end to end. Our success-based model means you only pay when a candidate successfully starts — with a 3-month replacement guarantee for complete peace of mind.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY JOSHUA PARTNERS -->
+  <section class="section sectors-bg fade-in">
+    <p class="section-label">Why Joshua Partners</p>
+    <h2>Recruitment done <em>differently.</em></h2>
+    <div class="pillars">
+      <div class="pillar">
+        <h4>Success-Based Model</h4>
+        <p>You only pay when a candidate successfully starts. No retainer. No upfront fees. Zero financial risk until you have the right person in the role.</p>
+      </div>
+      <div class="pillar">
+        <h4>3-Month Guarantee</h4>
+        <p>If a placed candidate doesn't work out within 3 months — we find a replacement at no additional cost. Your investment is always protected.</p>
+      </div>
+      <div class="pillar">
+        <h4>Sector Specialists</h4>
+        <p>We focus exclusively on renewable energy and clean tech. That depth of focus means we understand your industry, your roles and your candidates better than generalist agencies.</p>
+      </div>
+      <div class="pillar">
+        <h4>Global Reach</h4>
+        <p>We source talent across Australia, USA, UK, Canada and Europe — giving you access to a wider pool of qualified candidates than local-only recruitment firms.</p>
+      </div>
+      <div class="pillar">
+        <h4>Direct Outreach</h4>
+        <p>We don't just post on job boards. We actively reach out to passive candidates — people who are excelling in their current roles and open to the right opportunity.</p>
+      </div>
+      <div class="pillar">
+        <h4>Speed & Quality</h4>
+        <p>We move quickly without compromising on quality. Our targeted approach means faster shortlists, faster placements and less time with critical roles unfilled.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARKETS -->
+  <section class="section fade-in">
+    <p class="section-label">Our Markets</p>
+    <h2>Global talent. <em>Local precision.</em></h2>
+    <div class="markets-list">
+      <div class="market-item">
+        <div class="market-flag">🇦🇺</div>
+        <h4>Australia</h4>
+        <p>Solar, wind and storage across all states. Strong focus on Tasmania, Victoria and Queensland.</p>
+      </div>
+      <div class="market-item">
+        <div class="market-flag">🇺🇸</div>
+        <h4>United States</h4>
+        <p>The world's fastest growing solar and clean energy market.</p>
+      </div>
+      <div class="market-item">
+        <div class="market-flag">🇬🇧</div>
+        <h4>United Kingdom</h4>
+        <p>Offshore wind, solar and net zero transition talent.</p>
+      </div>
+      <div class="market-item">
+        <div class="market-flag">🇨🇦</div>
+        <h4>Canada</h4>
+        <p>Growing renewable energy market with strong government investment.</p>
+      </div>
+      <div class="market-item">
+        <div class="market-flag">🌍</div>
+        <h4>Europe</h4>
+        <p>Germany, Netherlands, Sweden and beyond — leading the global energy transition.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section contact-bg fade-in" id="contact">
+    <p class="section-label">Get in Touch</p>
+    <h2>Ready to find your <em>next hire?</em></h2>
+    <p>Tell us about the role you're looking to fill and we'll get back to you within 24 hours.</p>
+    <p style="color: var(--gold); font-family: 'Cormorant Garamond', serif; font-size: 20px; margin-top: 16px;">Reach out to start the conversation.</p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="index.html" class="logo">Joshua <span>Partners</span></a>
+    <p>Joshua Partners. Remote-First. Global Reach.</p>
+    <p style="color: #333; font-size: 11px;">Specialist Recruitment · Renewable Energy · Clean Tech · Solar</p>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add('visible');
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
